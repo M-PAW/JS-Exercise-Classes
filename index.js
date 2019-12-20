@@ -154,6 +154,12 @@ class Instructor extends Lambdasian {
   grade(student, subject){
     return `${student.name} receives a perfect score on ${subject}`;
   }
+
+  changeGrade(student, min, max){
+    student.grade += Math.floor(Math.random() * (max-min) + min)
+    return student.grade;
+  }
+
 }
 
 /*
@@ -177,6 +183,7 @@ class Student extends Lambdasian {
     this.previousBackground = attribute.previousBackground || 'Eat Pizza',
     this.className = attribute.className || 'Web27',
     this.favSubjects = attribute.favSubjects || ['JS', 'Node', 'Redux']
+    this.grade = attribute.grade || 99
   }
 
   listSubjects(favSubjects){
@@ -189,6 +196,15 @@ class Student extends Lambdasian {
 
   sprintChallenge(subject){
     return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+
+  graduate(){
+    if(this.grade > 70){
+      return `${this.name} you have this ${this.grade}, you are ready to graduate.`;
+    }
+    else {
+      return 'I\'m sorry, you have failed';
+    }
   }
 
 }
@@ -223,6 +239,7 @@ class ProjectManager extends Instructor {
 
 }
 
+
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
@@ -231,6 +248,27 @@ class ProjectManager extends Instructor {
       + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+
+const britt = new Instructor({
+  name : 'Brit',
+  age: 20,
+  location: 'Canada',
+  specialty: 'Teaching',
+  favLanguage: 'JS',
+  catchPhrase: 'Ada is Awesome!'
+});
+
+const Mike = new Student({
+  name: 'Mike',
+  age: 32,
+  className: 'Web27',
+  favSubjects: 'Comp Sci',
+  grade: 99
+})
+
+console.log(britt.changeGrade(Mike, 1,100));
+console.log(Mike.graduate());
 
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
